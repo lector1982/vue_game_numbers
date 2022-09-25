@@ -73,16 +73,36 @@ export default {
 			this.number = Math.floor(1 + Math.random() * (100 + 1 - 1));
 			switch (this.direction) {
 				case 1:
-					this.correctNumber = this.number-10;
+					if(this.number <= 10) {
+						this.randomNumber();
+					}
+					else {
+						this.correctNumber = this.number-10;
+					}
 					break;
 				case 2:
-					this.correctNumber = this.number+10;
+					if(this.number >= 91) {
+						this.randomNumber();
+					}
+					else {
+						this.correctNumber = this.number+10;
+					}
 					break;
 				case 3:
-					this.correctNumber = this.number-1;
+					if(this.number == 1) {
+						this.randomNumber();
+					}
+					else {
+						this.correctNumber = this.number-1;
+					}
 					break;
 				case 4:
-					this.correctNumber = this.number+1;
+					if(this.number == 100) {
+						this.randomNumber();
+					}
+					else {
+						this.correctNumber = this.number+1;
+					}
 					break;
 
 				default:

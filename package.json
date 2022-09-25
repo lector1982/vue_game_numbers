@@ -1,6 +1,6 @@
 {
-  "name": "vue_game_numbers",
-  "version": "0.1.0",
+  "name": "GameNumbers",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "core-js": "^3.8.3",
     "vue": "^3.2.13"
   },

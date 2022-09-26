@@ -83,7 +83,7 @@ export default {
 			correctNumber: 0,
 			correctWord: '',
 			numbers: null,
-			showModal: true,
+			showModal: false,
 			timer: 5000,
 			count: 5
 		}

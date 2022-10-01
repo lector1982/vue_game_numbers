@@ -1,0 +1,273 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+#app {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background: #CFDFFF;
+	font-family: sans-serif;
+}
+
+.correct {
+	height: 50px;
+	margin-bottom: 40px;
+}
+
+.correct-word {
+	line-height: 1;
+	font-size: 40px;
+	background: #69E275;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 5px;
+	padding: 10px;
+}
+
+.play {
+	background: #5165CD;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+	color: #fff;
+	padding: 15px 40px;
+	border: none;
+	border-radius: 5px;
+	font-size: 20px;
+	margin-top: 40px;
+	cursor: pointer;
+	outline: none;
+}
+.play[disabled] {
+	cursor: default;
+	opacity: 0.5;
+}
+.game {
+	width: 100%;
+	max-width: 800px;
+	padding: 20px;
+	margin: 0 auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.word {
+	width: 100px;
+	font-weight: bold;
+	font-size: 30px;
+}
+
+.number {
+	font-size: 60px;
+	margin: 30px 40px;
+	width: 80px;
+	text-align: center;
+	background: #FFFFFF;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 5px;
+}
+
+.word-above,
+.word-below {
+	width: 100%;
+	text-align: center;
+}
+
+.word-before {
+	text-align: right;
+}
+
+.word.active {
+	color: red;
+}
+
+.copyright {
+	position: absolute;
+	bottom: 5px;
+}
+
+.copyright a {
+	font-weight: 600;
+	color: #000;
+}
+
+.settings {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	width: 40px;
+	height: 40px;
+	cursor: pointer;
+}
+
+.settings-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #5165CD;
+	padding: 20px;
+	color: #fff;
+}
+
+.close {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	width: 40px;
+	height: 40px;
+	cursor: pointer;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	background: none;
+	color: #fff;
+}
+
+.settings-modal h2 {
+	text-transform: uppercase;
+	text-align: center;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+	transition: transform 0.4s cubic-bezier(0.5, 0, 0.5, 1);
+}
+
+.fade-enter-from,
+.fade-leave-to {
+	transform: translateX(100%);
+}
+
+.timer-counter {
+	margin-top: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.counter {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-left: 30px;
+}
+
+.counter button {
+	width: 40px;
+	height: 40px;
+	border: 2px solid #fff;
+	background: none;
+	color: #fff;
+	outline: none;
+	cursor: pointer;
+	padding: 0;
+}
+
+.counter .minus {
+	border-radius: 4px 0 0 4px;
+}
+
+.counter .plus {
+	border-radius: 0 4px 4px 0;
+}
+
+.count {
+	background: #fff;
+	width: 40px;
+	height: 40px;
+	font-size: 20px;
+	border: none;
+	text-align: center;
+	outline: none;
+}
+.sounds {
+	margin-top: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.checkbox {
+	display: block;
+	width: 100px;
+	height: 36px;
+	background: #333;
+	position: relative;
+	border-radius: 50px;
+	cursor: pointer;
+	margin-left: 50px;
+	box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2);
+}
+
+.checkbox:after {
+	content: 'OFF';
+	color: #000;
+	position: absolute;
+	right: 10px;
+	top: 9px;
+	z-index: 0;
+	font-size: 16px;
+	font-weight: bold;
+	text-shadow: 1px 1px 0px rgba(255, 255, 255, .15);
+}
+
+.checkbox:before {
+	content: 'ON';
+	color: #27ae60;
+	position: absolute;
+	left: 10px;
+	top: 9px;
+	z-index: 0;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.checkbox span {
+	display: block;
+	width: 40px;
+	height: 30px;
+	cursor: pointer;
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	z-index: 1;
+	background: #fcfff4;
+	background: linear-gradient(to top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	border-radius: 50px;
+	transition: all 0.4s ease;
+	box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+}
+
+.checkbox input[type=checkbox] {
+	visibility: hidden;
+}
+
+.checkbox input[type=checkbox]:checked+span {
+	left: 57px;
+}
+
+
+@media(max-width: 500px) {
+	.correct {
+		font-size: 35px;
+	}
+
+	.word {
+		font-size: 26px;
+	}
+
+	.word-before,
+	.word-after {
+		width: 75px;
+	}
+
+	.number {
+		width: 70px;
+		margin: 30px;
+	}
+}

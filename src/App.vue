@@ -29,8 +29,8 @@
 		<div class="word word-after" :class="{'active':direction==4}">after</div>
 		<div class="word word-below" :class="{'active':direction==2}">below</div>
 	</div>
-	<button class="play" @click="play">Play</button>
-	<div class="copyright">Property of <a href="//lectorweb.com" target="_blank">LectorWeb.com</a></div>
+	<button class="play" @click="play" :disabled="loader">Play</button>
+	<div class="copyright">Property of <a href="//lectorweb.com" target="_blank">LectorWeb.com</a> v.{{version}}</div>
 
 	<div class="settings" @click="showModal = true">
 		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -64,6 +64,14 @@
 					</button>
 				</div>
 			</div>
+
+			<div class="sounds">
+				<h4>Sound on/off</h4>
+				<label class="checkbox">
+					<input type="checkbox" value="None" name="check" checked v-model="sound">
+					<span></span>
+				</label>
+			</div>
 		</div>
 	</transition>
 </template>
@@ -71,6 +79,7 @@
 <script>
 
 import axios from 'axios';
+let pjson = require('../package.json');
 
 export default {
   name: 'App',
@@ -84,8 +93,10 @@ export default {
 			correctWord: '',
 			numbers: null,
 			showModal: false,
+			sound: true,
 			timer: 5000,
-			count: 5
+			count: 5,
+			version: pjson.version
 		}
 	},
 	methods: {
@@ -96,6 +107,10 @@ export default {
 			this.randomNumber(); //получаем число
 			this.correctWord = this.numbers[this.correctNumber];
 			setTimeout(() => {
+			if(this.sound) {
+				let audio = new Audio('audio/en_num_'+this.correctNumber+'.mp3');
+  audio.play();
+			}
 				this.loader = false;
 				this.show = true;
 			}, this.timer);
@@ -164,187 +179,5 @@ export default {
 		this.getNumbers(); //получаем весь массив цифр
 	}
 }
+
 </script>
-
-<style>
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-#app {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-	background: #CFDFFF;
-	font-family: sans-serif;
-}
-.correct {
-	height: 50px;
-	margin-bottom: 40px;
-}
-.correct-word {
-	line-height: 1;
-	font-size: 40px;
-	background: #69E275;
-	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
-	border-radius: 5px;
-	padding: 10px;
-}
-.play {
-	background: #5165CD;
-	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
-	color:#fff;
-	padding:15px 40px;
-	border: none;
-	border-radius: 5px;
-	font-size: 20px;
-	margin-top: 40px;
-	cursor: pointer;
-}
-.game {
-	width: 100%;
-	max-width: 800px;
-	padding: 20px;
-	margin: 0 auto;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: center;
-}
-.word {
-	width: 100px;
-	font-weight: bold;
-	font-size: 30px;
-}
-.number {
-	font-size: 60px;
-	margin: 30px 40px;
-	width: 80px;
-	text-align: center;
-	background: #FFFFFF;
-	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
-	border-radius: 5px;
-}
-.word-above,
-.word-below {
-	width: 100%;
-	text-align: center;
-}
-.word-before {
-	text-align: right;
-}
-.word.active {
-	color: red;
-}
-.copyright {
-	position: absolute;
-	bottom: 5px;
-}
-.copyright a {
-	font-weight: 600;
-	color: #000;
-}
-.settings {
-	position: absolute;
-	top: 5px;
-	right: 5px;
-	width: 40px;
-	height: 40px;
-	cursor: pointer;
-}
-.settings-modal {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: #5165CD;
-	padding: 20px;
-}
-.close {
-	position: absolute;
-	top: 5px;
-	right: 5px;
-	width: 40px;
-	height: 40px;
-	cursor: pointer;
-	border: none;
-	cursor:pointer;
-	padding: 0;
-	background: none;
-	color:#fff;
-}
-.settings-modal h2 {
-	color: #fff;
-	text-transform: uppercase;
-	text-align: center;
-}
-.fade-enter-active,
-.fade-leave-active {
-  transition: transform 0.4s cubic-bezier(0.5, 0, 0.5, 1);
-}
-.fade-enter-from,
-.fade-leave-to {
-  transform: translateX(100%);
-}
-.timer-counter {
-	margin-top: 100px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-.counter {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-left: 30px;
-}
-.timer-counter h4 {
-	color:#fff;
-}
-.counter button {
-	width: 40px;
-	height: 40px;
-	border: 2px solid #fff;
-	background: none;
-	color: #fff;
-	outline: none;
-	cursor: pointer;
-	padding: 0;
-}
-.counter .minus {
-	border-radius: 4px 0 0 4px;
-}
-.counter .plus {
-	border-radius: 0 4px 4px 0;
-}
-.count {
-	background: #fff;
-	width: 40px;
-	height: 40px;
-	font-size: 20px;
-	border: none;
-	text-align: center;
-	outline: none;
-}
-
-@media(max-width: 500px){
-	.correct {
-		font-size: 35px;
-	}
-	.word {
-		font-size: 26px;
-	}
-	.word-before,
-	.word-after {
-		width: 75px;
-	}
-	.number {
-		width: 70px;
-		margin: 30px;
-	}
-}
-</style>
